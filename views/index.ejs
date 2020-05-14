@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sample MVC website</title>
+   <link rel="stylesheet" type="text/css" href="css/StyleSheet.css">
+  <script>
+  window.onload = function(){
+
+  //picture to be displayed
+  var index = 0
+
+  //file names of all the images. This acts as a local model that provides the new images
+  var houses = ["0.jpeg", "1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg"]
+
+
+  //event listenr acts as a controller that will change the image displayed
+  document.getElementById("fromFile").addEventListener("click", function(){
+    if (index < 4) {
+      index += 1
+      //view is changed by DOM evenet listener
+      document.getElementById("file").src="images/" + houses[index]
+    }else{
+      index = 0
+      document.getElementById("file").src="images/" + houses[index]
+    }
+  })
+
+};
+  </script>
+</head>
+  <body>
+    <!-- this section acts as a local mvc that relies on a database of images -->
+    <h1>This is a sample of code that follows the MVC pattern</h1>
+
+    <p id="fromFile" class="change"> Change Image </p>
+
+    <img id="file" src="images/0.jpeg" alt="House" width="400" height ="200">
+
+    <!-- this model in this section is a remote database (Weather API) that holds weather information -->
+    <p>Check Your Weather</p>
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <!-- the controller is the input where the user types in the name and clicks 'Get Weather' -->
+          <input name="city" type="text" placeholder="Enter a City" required>
+          <input type="submit" value="Get Weather">
+        </form>
+        <!-- the view is then updated and the city and temp are displayed -->
+        <% if(weather !== null){ %>
+         <p><%= weather %></p>
+       <% } %>
+
+       <% if(error !== null){ %>
+         <p><%= error %></p>
+       <% } %>
+    </fieldset>
+  </div>
+  </body>
+</html>
